@@ -7,6 +7,10 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
+app.get("/user", (req, res) => {
+  res.render("user", { title: "Profile", userProfile: { nickname: "Auth0" } });
+});
+
 // Allow client to access cross domain or ip-address
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
