@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    JSON Read SMS
+    <div id="app">
+      <ul>
+        <li :key="'message' + index" v-for="(message, index) in listOfMessages">
+          {{message}}
+        </li>
+      </ul>
+      <!-- <input type="text" v-model="input" /> -->
+      <!-- <button @click="sendPrivateMessage">send to me</button>
+      <button @click="sendGlobalMessage">send to everyone</button>
+      <button @click="sendBroadcastMessage">send to everyone but me</button> -->
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script>
+      const socket = io();
+      const vueApp = new Vue({
+        el: "#app",
+        data: {
+          input: "",
+          listOfMessages: [],
+        },
+        methods: {
+          sendPrivateMessage() {
+            socket.emit("private message", this.input);
+            this.input = "";
+          },
+          sendGlobalMessage() {
+            socket.emit("global message", this.input);
+            this.input = "";
+          },
+          sendBroadcastMessage() {
+            socket.emit("broadcast message", this.input);
+            this.input = "";
+          },
+        },
+      });
+
+      socket.on("get sms", (message) => {
+        vueApp.listOfMessages.push(message);
+      });
+    </script>
+  </body>
+</html>
