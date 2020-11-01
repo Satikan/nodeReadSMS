@@ -7,6 +7,17 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
+// Allow client to access cross domain or ip-address
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', '*');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
+
 io.on('connection', (socket) => {
   console.log('a user connected');
   socket.on("get sms", msg => {
