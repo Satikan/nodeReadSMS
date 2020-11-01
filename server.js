@@ -13,6 +13,18 @@ io.on('connection', (socket) => {
       console.log(msg);
       io.emit("get sms", msg);
   });
+
+  socket.on("private message", (message) => {
+    socket.emit("get sms", message);
+  });
+
+  socket.on("global message", (message) => {
+    io.emit("get sms", message);
+  });
+
+  socket.on("broadcast message", (message) => {
+    socket.broadcast.emit("get sms", message);
+  });
 });
 
 http.listen(PORT, () => {
