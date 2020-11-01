@@ -3,12 +3,33 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var PORT = process.env.PORT || 3000
 
+var movies = [
+  {
+      id: 0,
+      name: "The Flash",
+      type: "series",
+      isPublished: false
+  },
+  {
+      id: 1,
+      name: "Arrow",
+      type: "series",
+      isPublished: true
+  },
+  {
+      id: 2,
+      name: "Harry Potter",
+      type: "movie",
+      isPublished: false
+  }
+];
+
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get("/user", (req, res) => {
-  res.render("user", { title: "Profile", userProfile: { nickname: "Auth0" } });
+app.get('/api/movies', (req, res) => {
+  res.send(movies);
 });
 
 // Allow client to access cross domain or ip-address
