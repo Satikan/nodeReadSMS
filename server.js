@@ -32,6 +32,7 @@ app.get('/api/movies', (req, res) => {
   res.send(movies);
 });
 
+
 // Allow client to access cross domain or ip-address
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');

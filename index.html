@@ -13,10 +13,6 @@
           {{message}}
         </li>
       </ul>
-      <input type="text" v-model="input" />
-      <button @click="sendPrivateMessage">send to me</button>
-      <button @click="sendGlobalMessage">send to everyone</button>
-      <button @click="sendBroadcastMessage">send to everyone but me</button>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
